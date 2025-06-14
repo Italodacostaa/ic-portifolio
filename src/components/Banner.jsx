@@ -1,11 +1,10 @@
-// src/components/Banner.jsx
 import React from 'react';
 import './Banner.css';
-import { Fade, Zoom } from 'react-awesome-reveal'; // Certifique-se de ter instalado react-awesome-reveal
+import { Fade, Zoom } from 'react-awesome-reveal'; 
 
 const Banner = () => {
   return (
-    <section id='home' className="banner"> {/* O ID 'home' é o mesmo que você usa no Header */}
+    <section id='home' className="banner"> 
       <div className="banner-content-wrapper">
         <div className="banner-content">
           <Fade direction="bottom" delay={500}>
@@ -19,7 +18,7 @@ const Banner = () => {
             </p>
           </Fade>
           <Fade direction="bottom" delay={900}>
-            <a href="#contact" className="banner-button"> {/* Link para a seção de contato */}
+            <a href="#contact" className="banner-button">
               Fale Comigo Sobre Seu Projeto
             </a>
           </Fade>
@@ -27,7 +26,7 @@ const Banner = () => {
         <div className="banner-avatar">
           <Zoom delay={1100}>
             <img
-              src={`${import.meta.env.BASE_URL}images/avatar.jpeg`} // Caminho para sua imagem
+              src={`${import.meta.env.BASE_URL}images/avatar.jpeg`}
               alt="Italo Costa Avatar"
               className="avatar-img"
             />
