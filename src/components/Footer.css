@@ -1,0 +1,80 @@
+.footer {
+    background-color: var(--section-bg-color);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); 
+    padding: 4px 0;
+    height: var(--footer-height);
+    display: flex; 
+    align-items: center; 
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.footer-content-wrapper {
+    max-width: var(--max-width-content); 
+    margin: 0 auto;
+    padding: 0 var(--global-padding-x); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Estilo do texto principal do footer */
+.footer-text {
+    font-size: var(--small-font-size); 
+    text-align: center;
+    color: var(--text-color-variant); 
+    width: 100%;
+    margin: 0;
+    line-height: 1.5;
+    transition: color 0.3s ease; 
+}
+
+.footer-link {
+    font-weight: var(--font-medium); 
+    color: var(--primary-color); 
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--secondary-color); 
+}
+
+.footer-text-gradient {
+    font-weight: var(--font-medium); 
+    background-image: linear-gradient(to right, #ff007f, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+}
+
+/* === Tema Escuro === */
+[data-theme="dark"] .footer {
+    background-color: var(--bg-color-dark); 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.35); 
+}
+
+/* --- Media Query para Desktop --- */
+@media (min-width: 768px) {
+    .footer-content-wrapper {
+        flex-direction: row; 
+        justify-content: center; 
+        gap: 0;
+    }
+
+    .footer-text {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 767px) {
+  .footer-text {
+    font-size: var(--smaller-font-size);
+  }
+}

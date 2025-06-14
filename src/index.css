@@ -1,0 +1,196 @@
+@import url('https://unicons.iconscout.com/release/v4.0.8/css/line.css');
+
+/* === Reset base === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+    --primary-color: #0091FF;
+    --secondary-color: #007ACC; 
+    --text-color-light: #f0f0f0;
+    --text-color-dark: #111; 
+    --bg-color-light: #ffffff; 
+    --bg-color-dark: #1A1A1A; 
+    --card-bg-light: #f9f9f9; 
+    --card-bg-dark: #2A2A2A;  
+    --border-color-light: #e0e0e0; 
+    --border-color-dark: #444; 
+    --max-width-content: 1350px; 
+    --global-padding-x: 20px; 
+    --header-height: 65px;
+    --desktop-breakpoint: 768px; 
+    --mb-0-25: 0.25rem;
+    --mb-0-5: 0.5rem;
+    --mb-0-75: 0.75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+    --big-font-size: 2.8rem;
+    --h1-font-size: 2.5rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.75rem;
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+    --z-tooltip: 10;
+    --z-fixed: 100;
+    --page-bg-color: var(--bg-color-light);
+    --page-text-color: var(--text-color-dark);
+    --section-bg-color: var(--bg-color-light);
+    --heading-color: var(--primary-color);
+    --button-bg-color: var(--primary-color);
+    --button-text-color: var(--text-color-light);
+    --button-hover-bg-color: var(--secondary-color);
+    --card-bg-color: var(--card-bg-light);
+    --card-shadow-color: rgba(0, 0, 0, 0.1);
+    --border-color: var(--border-color-light); 
+}
+
+/*  Tema Escuro  */
+[data-theme="dark"] {
+    --page-bg-color: var(--bg-color-dark);
+    --page-text-color: var(--text-color-light);
+    --section-bg-color: #2C2C2C; 
+    --heading-color: var(--secondary-color);
+    --button-bg-color: var(--secondary-color);
+    --button-text-color: var(--text-color-light);
+    --button-hover-bg-color: var(--primary-color);
+    --card-bg-color: var(--card-bg-dark); 
+    --card-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  margin: 0;
+  padding-top: var(--header-height);
+  background-color: var(--page-bg-color);
+  color: var(--page-text-color);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.App {
+  width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.App > *:not(.footer) {
+    flex-shrink: 0;
+}
+.App > *:last-child {
+    flex-grow: 1;
+}
+
+section {
+  padding: 60px var(--global-padding-x);
+  margin-bottom: 2rem;
+  background-color: var(--section-bg-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+section:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.container {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: 0 var(--global-padding-x);
+}
+
+.section_title {
+    font-size: var(--h1-font-size); 
+    color: var(--heading-color);
+    margin-bottom: var(--mb-1); 
+    text-align: center; 
+    transition: color 0.3s ease;
+}
+
+.section_subtitle {
+    display: block;
+    font-size: var(--normal-font-size);
+    color: var(--primary-color); 
+    margin-bottom: var(--mb-2); 
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    transition: color 0.3s ease;
+}
+
+h1 { 
+    font-size: var(--h1-font-size);
+}
+
+h2 { 
+    font-size: var(--h2-font-size);
+    text-align: center; 
+    margin-bottom: 2rem;
+}
+
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--secondary-color);
+}
+
+/* Botões gerais */
+.btn, .button { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: 0.9rem 2.2rem;
+    border-radius: 0.6rem;
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 8px var(--card-shadow-color);
+}
+
+.btn:hover, .button:hover {
+    background-color: var(--button-hover-bg-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px var(--card-shadow-color); 
+}
+
+/* Ícones de botão */
+.button_icon {
+    margin-left: var(--mb-0-5);
+    font-size: 1.2rem;
+}
+
+[data-theme="dark"] .menu-toggle .menu-icon path {
+    stroke: var(--text-color-light);
+}
+
+#root > div:first-child[src="/vite.svg"] {
+    display: none;
+}

@@ -1,0 +1,634 @@
+/* --- VARIAVEIS (Certifique-se de que estas estão em um arquivo global) --- */
+:root {
+    /* Cores */
+    --primary-color: #0091FF; /* Azul principal */
+    --secondary-color: #007ACC; /* Azul secundário (hover) */
+    --text-color-light: #f0f0f0; /* Cor do texto para fundos escuros */
+    --text-color-dark: #111;    /* Cor do texto para fundos claros */
+    --bg-color-light: #ffffff; /* Fundo geral para tema claro */
+    --bg-color-dark: #1A1A1A;   /* Fundo geral para tema escuro */
+
+    /* Spacing & Layout */
+    --max-width-content: 1350px;
+    --global-padding-x: 20px;
+
+    /* Font sizes - Ajustado para melhor hierarquia */
+    --big-font-size: 2.8rem;
+    --h1-font-size: 2.5rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.5rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.75rem;
+    --tiny-font-size: 0.625rem;
+
+    /* Font weight */
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /* Z-index (exemplo, ajuste conforme seu projeto) */
+    --z-tooltip: 10;
+    --z-fixed: 100;
+
+    /* Novas variáveis baseadas nas suas cores para consistência */
+    --first-color: var(--primary-color);
+    
+    --container-color-light: #f9f9f9;
+    --container-color-dark: #2A2A2A;
+
+    --card-bg-light: #ffffff;
+    --card-bg-dark: #222222;
+
+    --input-color: #ffffff;
+    --input-color-dark: #222222;
+
+    --text-color-light-variant: #666666;
+    --text-color-light-variant-dark: #aaaaaa;
+
+    --title-color: var(--text-color-dark);
+    --title-color-dark: var(--text-color-light);
+
+    --border-color-light: rgba(0, 0, 0, 0.1);
+    --border-color-dark: rgba(255, 255, 255, 0.1);
+
+    /* Sombras */
+    --shadow-small: 0 5px 15px rgba(0, 0, 0, 0.08);
+    --shadow-dark: 0 5px 15px rgba(0, 0, 0, 0.35);
+
+    /* RGB para rgba() */
+    --primary-color-rgb: 0, 145, 255;
+}
+
+/* Modo escuro */
+/* Adicione esta transição para o body ou html para um efeito global de transição */
+body {
+    transition: background-color 0.4s ease, color 0.4s ease; /* Transição global */
+}
+
+[data-theme="dark"] {
+    --input-color: var(--input-color-dark);
+    --text-color: var(--text-color-light);
+    --title-color: var(--title-color-dark);
+    /* Se você tiver um componente global que define o background-color para o tema,
+       adicione a transição lá também se o 'body' não for suficiente. */
+    background-color: var(--bg-color-dark); /* Garante que o body/html mude de cor */
+    color: var(--text-color-light); /* Garante que o texto padrão mude de cor */
+}
+
+/* --- CONTACT SECTION --- */
+.contact.section {
+    padding: 4rem var(--global-padding-x);
+    background-color: var(--bg-color-light);
+    color: var(--text-color-dark);
+    /* Ajuste a transição para ser mais rápida e incluir as cores */
+    transition: background-color 0.4s ease, color 0.4s ease, opacity 0.6s ease-out, transform 0.6s ease-out;
+
+    /* Estado inicial (quando não está visível) */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Resto do CSS da seção contact permanece como antes */
+.contact.section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animação para os títulos */
+.contact .section_title,
+.contact .section_subtitle {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out, color 0.4s ease; /* Adicionada transição para color */
+}
+
+.contact.section.is-visible .section_title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.contact.section.is-visible .section_subtitle {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+
+[data-theme="dark"] .contact.section {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-light);
+}
+
+/* Títulos da Seção (já com estilos base) */
+.contact .section_title {
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-bold);
+    color: var(--text-color-dark);
+    margin-bottom: var(--mb-0-75);
+    transition: color 0.4s ease; /* Transição para a cor do título */
+}
+
+[data-theme="dark"] .contact .section_title {
+    color: var(--text-color-light);
+}
+
+.contact .section_subtitle {
+    font-size: var(--normal-font-size);
+    color: var(--text-color-light-variant);
+    margin-bottom: var(--mb-2-5);
+    transition: color 0.4s ease; /* Transição para a cor do subtítulo */
+}
+
+/* Container principal de contato (grid) */
+.contact_container.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    row-gap: 3rem;
+}
+
+/* Conteúdo de cada bloco (contact_group) */
+.contact_group {
+    background-color: var(--container-color-light);
+    padding: 2.5rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-small);
+    /* Ajuste a transição para ser mais rápida e incluir as cores/box-shadow */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, opacity 0.6s ease-out, transform 0.6s ease-out;
+
+    /* Estado inicial (quando não está visível) */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* Resto do CSS dos grupos permanece como antes */
+.contact.section.is-visible .contact_group {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact.section.is-visible .contact_group:nth-child(1) {
+    transition-delay: 0.4s;
+}
+.contact.section.is-visible .contact_group:nth-child(2) {
+    transition-delay: 0.6s;
+}
+
+
+[data-theme="dark"] .contact_group {
+    background-color: var(--container-color-dark);
+    box-shadow: var(--shadow-dark);
+}
+
+/* Título interno dos blocos (contact_title_block) */
+.contact_title_block {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--mb-1-5);
+    color: var(--primary-color); /* Esta cor geralmente não muda, mas bom verificar */
+    text-align: center;
+}
+
+/* --- Informações de Contato (contact_info_wrapper e contact_info_item) --- */
+.contact_info_wrapper {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: var(--mb-2-5);
+}
+
+.contact_info_item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background-color: var(--card-bg-light);
+    padding: 1rem 1.25rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* Ajuste a transição para ser mais rápida e incluir as cores/box-shadow */
+    transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+[data-theme="dark"] .contact_info_item {
+    background-color: var(--card-bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contact_info_item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .contact_info_item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.contact_icon {
+    font-size: 1.5rem; /* Reduzido de 2rem para 1.5rem */
+    color: var(--first-color);
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.contact_info-title {
+    font-size: var(--h3-font-size);
+    font-weight: var(--font-medium);
+    color: var(--text-color-dark);
+    margin-bottom: var(--mb-0-25);
+    transition: color 0.4s ease; /* Transição para a cor do título */
+    margin-top: -10px;
+}
+
+[data-theme="dark"] .contact_info-title {
+    color: var(--text-color-light);
+}
+
+.contact_info-subtitle {
+    font-size: var(--small-font-size);
+    color: var(--text-color-light-variant);
+    display: block;
+    margin-bottom: var(--mb-0-5);
+    transition: color 0.4s ease; /* Transição para a cor do subtítulo */
+}
+
+[data-theme="dark"] .contact_info-subtitle {
+    color: var(--text-color-light-variant-dark);
+}
+
+.contact_button {
+    font-size: var(--smaller-font-size);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: var(--font-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact_button:hover {
+    color: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+.contact_button-icon {
+    font-size: 0.9rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* --- Redes Sociais --- */
+.contact_socials {
+    margin-top: var(--mb-2-5);
+    text-align: center;
+}
+
+.contact_social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: var(--mb-1);
+}
+
+.contact_social-icon {
+    font-size: 2.2rem;
+    color: var(--text-color-dark);
+    transition: color 0.4s ease, transform 0.3s ease; /* Ajustada a transição de color */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+[data-theme="dark"] .contact_social-icon {
+    color: var(--text-color-light);
+}
+
+.contact_social-icon:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* --- Formulário de Contato --- */
+.contact_form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact_content {
+    background-color: var(--input-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem 0.25rem;
+    border: var(--primary-color) 2px solid;
+    /* Ajuste a transição para ser mais rápida e incluir as cores/background */
+    transition: border-color 0.4s ease, background-color 0.4s ease;
+}
+
+[data-theme="dark"] .contact_content {
+    background-color: var(--input-color-dark);
+    border-color: var(--primary-color);
+}
+
+.contact_content.focusIn {
+    border-color: var(--secondary-color);
+}
+
+.contact_content.valid {
+    border-color: #4CAF50;
+}
+
+.contact_content.invalid {
+    border-color: #F44336;
+}
+
+.contact_label {
+    font-size: var(--smaller-font-size);
+    color: var(--title-color);
+    margin-bottom: var(--mb-0-25);
+    display: block;
+    transition: color 0.4s ease; /* Transição para a cor do label */
+}
+
+[data-theme="dark"] .contact_label {
+    color: var(--title-color-dark);
+}
+
+.contact_input {
+    width: 100%;
+    background-color: transparent;
+    color: var(--text-color-dark);
+    font-family: inherit;
+    font-size: var(--normal-font-size);
+    border: none;
+    outline: none;
+    padding: 0.25rem 0.5rem 0.5rem 0;
+    transition: color 0.4s ease; /* Transição para a cor do input */
+}
+
+[data-theme="dark"] .contact_input {
+    color: var(--text-color-light);
+}
+
+.contact_form-area .contact_input {
+    resize: vertical;
+    min-height: 6rem;
+    padding-top: 0.5rem;
+}
+
+/* Botão de envio */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.75rem;
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    /* Ajuste a transição para ser mais rápida e incluir o background-color */
+    transition: background-color 0.4s ease, transform 0.2s ease;
+    align-self: center;
+}
+
+.button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+[data-theme="dark"] .button {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+[data-theme="dark"] .button:hover {
+    background-color: var(--secondary-color);
+}
+
+.button_icon {
+    font-size: 1.1rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Mensagem de alerta */
+.alert_style {
+    text-align: center;
+    padding: 10px;
+    font-size: var(--small-font-size);
+    border-radius: 0.5rem;
+    margin-top: var(--mb-1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.alert_style.success-message {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.alert_style.error-message {
+    background-color: #F44336;
+    color: #fff;
+}
+
+.alert_style.success-message,
+.alert_style.error-message {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- Responsividade --- */
+
+/* Tablets (768px a 1023px de largura) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .contact_container.container {
+        grid-template-columns: 1fr;
+        row-gap: 2.5rem;
+        padding: 0 var(--global-padding-x);
+    }
+
+    .contact_group {
+        padding: 2rem 1.5rem;
+    }
+
+    .contact_title_block {
+        font-size: var(--h3-font-size);
+        margin-bottom: var(--mb-1);
+    }
+
+    .contact_info_wrapper {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .contact_info_item {
+        padding: 1rem;
+    }
+
+    .contact_icon {
+        font-size: 1.8rem;
+    }
+
+    .contact_info-title {
+        font-size: var(--small-font-size);
+    }
+
+    .contact_info-subtitle {
+        font-size: var(--smaller-font-size);
+    }
+
+    .contact_button {
+        font-size: var(--tiny-font-size);
+    }
+
+    .contact_social-links {
+        gap: 1rem;
+    }
+
+    .contact_social-icon {
+        font-size: 2rem;
+    }
+
+    .contact_content {
+        padding: 0.6rem 0.8rem 0.2rem;
+    }
+
+    .contact_label {
+        font-size: var(--smaller-font-size);
+    }
+
+    .contact_input {
+        font-size: var(--small-font-size);
+        padding: 0.2rem 0.4rem 0.4rem 0;
+    }
+
+    .contact_form-area .contact_input {
+        min-height: 5rem;
+    }
+
+    .button {
+        padding: 0.8rem 1.6rem;
+        font-size: var(--small-font-size);
+    }
+}
+
+/* Celulares (até 767px de largura) */
+@media screen and (max-width: 767px) {
+    .contact.section {
+        padding: 3rem var(--global-padding-x);
+    }
+
+    .contact .section_title {
+        font-size: var(--h2-font-size);
+        margin-bottom: var(--mb-0-5);
+    }
+
+    .contact .section_subtitle {
+        font-size: var(--small-font-size);
+        margin-bottom: var(--mb-2);
+    }
+
+    .contact_container.container {
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+        padding: 0 var(--global-padding-x);
+    }
+
+    .contact_group {
+        padding: 1.5rem 1rem;
+        border-radius: 1rem;
+    }
+
+    .contact_title_block {
+        font-size: var(--h3-font-size);
+        margin-bottom: var(--mb-1);
+    }
+
+    .contact_info_wrapper {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .contact_info_item {
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .contact_icon {
+        font-size: 1.6rem;
+        margin-bottom: var(--mb-0-25);
+    }
+
+    .contact_info-title {
+        font-size: var(--small-font-size);
+    }
+
+    .contact_info-subtitle {
+        font-size: var(--smaller-font-size);
+        margin-bottom: var(--mb-0-5);
+    }
+
+    .contact_button {
+        font-size: var(--tiny-font-size);
+        gap: 0.3rem;
+    }
+
+    .contact_socials {
+        margin-top: var(--mb-2);
+    }
+
+    .contact_social-links {
+        gap: 0.8rem;
+    }
+
+    .contact_social-icon {
+        font-size: 2rem;
+    }
+
+    .contact_form {
+        gap: 1rem;
+    }
+
+    .contact_content {
+        padding: 0.5rem 0.75rem 0.2rem;
+        border-radius: 0.5rem;
+    }
+
+    .contact_label {
+        font-size: var(--tiny-font-size);
+    }
+
+    .contact_input {
+        font-size: var(--smaller-font-size);
+        padding: 0.15rem 0.3rem 0.3rem 0;
+    }
+
+    .contact_form-area .contact_input {
+        min-height: 4rem;
+    }
+
+    .button {
+        padding: 0.75rem 1.5rem;
+        font-size: var(--small-font-size);
+    }
+
+    .button_icon {
+        font-size: 1rem;
+    }
+}

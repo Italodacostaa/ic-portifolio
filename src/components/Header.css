@@ -1,0 +1,333 @@
+/* === Variáveis Globais === */
+:root {
+    --primary-color: #0091FF;
+    --secondary-color: #007ACC;
+    --text-color-light: #f0f0f0;
+    --text-color-dark: #111;
+    --bg-color-light: #ffffff;
+    --bg-color-dark: #1A1A1A;
+    --border-color: #eee;
+    --max-width-content: 1350px;
+    --header-padding-x: 20px;
+    --header-height: 65px;
+    --desktop-breakpoint: 768px;
+}
+
+/* === Reset base === */
+body {
+    margin: 0;
+    padding-top: var(--header-height);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: var(--bg-color-light);
+    color: var(--text-color-dark);
+}
+
+/* === Header Base === */
+.header {
+    background-color: var(--bg-color-light);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px 50px; /* Considere usar var(--header-padding-x) aqui também para consistência */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.header-content-wrapper {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: 0 var(--header-padding-x);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.header-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem; /* Mantenha se desejar um pequeno espaço entre logo e toggle em mobile */
+}
+
+/* === Logo === */
+.logo-link {
+    display: inline-block;
+}
+.header-logo {
+    width: var(--header-height);
+    height: auto;
+    display: block;
+}
+
+/* === Menu Toggle (Mobile) === */
+.menu-toggle {
+    cursor: pointer;
+    display: block;
+    z-index: 1001;
+    /* Adiciona estilo visual para o botão */
+    background: none;
+    border: none;
+    padding: 10px; /* Aumenta a área clicável */
+    display: flex; /* Para centralizar o ícone */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* Transição para possível background no hover */
+}
+
+.menu-toggle:hover {
+    /* Opcional: Adicionar um leve fundo ao passar o mouse */
+    background-color: rgba(0, 0, 0, 0.05); /* Leve cinza em modo claro */
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Leve cinza em modo escuro */
+}
+
+
+.menu-icon {
+    stroke: var(--text-color-dark);
+    transition: all 0.3s ease; /* Transição para todas as propriedades do SVG */
+}
+
+/* === Navegação === */
+.main-nav {
+    /* Escondido por padrão em MOBILE com visibilidade/altura para animação */
+    display: flex; /* Mantido flex para estrutura interna */
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: 0; /* Começa com altura zero */
+    overflow: hidden; /* Esconde o conteúdo extra */
+    opacity: 0; /* Começa invisível */
+    visibility: hidden; /* Garante que não interaja */
+    transform: translateY(-10px); /* Leve deslocamento para animação */
+    transition: height 0.4s ease-out, opacity 0.4s ease-out, transform 0.4s ease-out, background-color 0.3s ease;
+
+    background-color: var(--bg-color-light);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 0 var(--header-padding-x); /* Padding vertical será adicionado quando aberto */
+    box-sizing: border-box;
+    z-index: 999;
+}
+
+.main-nav.is-open {
+    height: calc(100vh - var(--header-height)); /* Ocupa o restante da viewport */
+    padding: 30px var(--header-padding-x); /* Adiciona padding quando aberto */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    width: 100%;
+}
+
+.nav-links li {
+    padding: 10px 0;
+    width: 100%;
+}
+
+.nav-links .nav-item {
+    color: var(--text-color-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+    display: block;
+    padding: 5px 0;
+}
+
+.nav-links .nav-item:hover:not(.active) {
+    color: var(--secondary-color);
+}
+
+.nav-links .nav-item.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.nav-links .nav-item:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* === Social Links === */
+.social-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.social-links a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links svg {
+    fill: var(--text-color-dark);
+    transition: fill 0.3s ease;
+}
+
+.social-links a:hover svg {
+    fill: var(--primary-color);
+}
+
+
+/* === Botão de Tema === */
+.theme-toggle-btn {
+    font-size: 1.3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    align-self: center; /* Permite alinhamento em flex column */
+    margin-top: 20px; /* Adicionado espaço acima em mobile */
+    color: var(--text-color-dark);
+    transition: color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    color: var(--primary-color);
+}
+
+/* === Tema Escuro === */
+[data-theme="dark"] { /* Usando o atributo data-theme para maior especificidade e organização */
+    --bg-color-light: var(--bg-color-dark); /* Redefine bg-color para dark mode */
+    --text-color-dark: var(--text-color-light); /* Redefine text-color para dark mode */
+}
+
+/* Adaptação dos estilos de tema para usar a abordagem data-theme */
+[data-theme="dark"] body {
+    background-color: var(--bg-color-dark);
+    color: var(--text-color-light);
+}
+
+[data-theme="dark"] .header {
+    background-color: var(--bg-color-dark);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .main-nav,
+[data-theme="dark"] .main-nav.is-open {
+    background-color: var(--bg-color-dark);
+}
+
+[data-theme="dark"] .nav-links .nav-item {
+    color: var(--text-color-light);
+}
+
+[data-theme="dark"] .nav-links .nav-item:hover:not(.active) {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .nav-links .nav-item.active {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .social-links svg {
+    fill: var(--text-color-light);
+}
+
+[data-theme="dark"] .social-links a:hover svg {
+    fill: var(--primary-color);
+}
+
+[data-theme="dark"] .menu-icon {
+    stroke: var(--text-color-light);
+}
+
+[data-theme="dark"] .theme-toggle-btn {
+    color: var(--text-color-light);
+}
+
+
+/* === Responsivo: Desktop === */
+@media (min-width: 768px) { /* Usando a variável para consistência */
+    .menu-toggle {
+        display: none;
+    }
+
+    .header-content-wrapper {
+        padding: 0;
+    }
+
+    .header-top-row {
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0;
+        width: auto;
+        gap: 0;
+    }
+
+    .main-nav {
+        display: flex; /* Não precisa de !important aqui, pois é mais específico que a regra de mobile oculta */
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        width: auto;
+        position: static; /* Remove o posicionamento fixo/absoluto do mobile */
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        opacity: 1; /* Garante visibilidade (para transição) */
+        visibility: visible; /* Garante visibilidade (para transição) */
+        transform: translateY(0); /* Remove transformação (para transição) */
+        z-index: auto;
+        height: auto; /* Altura automática em desktop */
+        overflow: visible; /* Conteúdo visível */
+    }
+
+    .nav-links {
+        flex-direction: row;
+        margin-bottom: 0;
+        margin-right: 40px;
+        width: auto;
+    }
+
+    .nav-links li {
+        padding: 0;
+        margin-left: 20px;
+        width: auto;
+    }
+
+    .nav-links .nav-item {
+        padding: 0;
+    }
+
+    .social-links {
+        gap: 20px;
+        width: auto;
+        margin: 0;
+    }
+
+    .theme-toggle-btn {
+        margin: 0 0 0 20px; /* Adicionado um margin-left para separá-lo dos links sociais */
+    }
+}
